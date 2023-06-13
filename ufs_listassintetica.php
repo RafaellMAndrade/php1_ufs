@@ -9,15 +9,16 @@
     <style>
 
     .background-image {
-        position: fixed;
+        position: ;
         top: 0;
         left: 0;
+        padding-bottom: 2em;
         width: 100%;
         height: 100%;
-        opacity: 0.4;
+        opacity: 1;
         pointer-events: none;
         background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1024px-Flag_of_Brazil.svg.png');
-        background-repeat: no-repeat;
+        background-repeat: repeat;
         background-size: cover;
     }
     
@@ -41,18 +42,18 @@
     }
 
     .title {
-      font-size: 4em;
+      font-size: 4.1em;
     }
   </style>
 </head>
 
 <body>
-  <div class="background-image">
-  </div>
-  <div>
     <header>
-    <h1 class="title">
-        PHP #1 - Lista Sintetica de UFs    
+    <div>
+  </div>
+    <div>
+    <h1 class="title background-image">
+        PHP #1<br> - Lista Sintetica de UFs    
     <h1>
     <p>
       Uma lista, feita a mão, sem uso de BDs, que mostra todos os dados das 27 unidades federativas do país, a bandeira(.svg) veio do Wikimedia, comunidade irmã a Wikipedia, sendo essa, fonte das informações aqui listadas.
@@ -496,6 +497,46 @@
     ),
   );
   ?>
+  <table>
+      <thead style="background-color: #1974d2">
+        <?php
+          foreach ($syntheticlist as $keylist => $valuelist) {
+            echo "<tr>";
+          foreach ($valuelist as $key => $value) {
+            echo "<th>$key</th>";
+          }
+          echo "</tr>";
+          break;
+          }
+        ?>
+      </thead>
+      <tbody>
+        <?php
+          foreach ($syntheticlist as $keylist => $valuelist) {
+            echo "<tr>";
+          foreach ($valuelist as $key => $value) {
+            if ($key === "IDH (2010)" && floatval($value) >= 0.800) {
+              echo "<td style='color: blue;'>$value</td>";
+            } 
+            // if ($key === "IDH (2010)" && floatval($value) >= 0.700) {
+            //   echo "<td style='color: green;'>$value</td>";
+            // }
+
+            // if ($key === "IDH (2010)" && floatval($value) >= 0.600) {
+            //   echo "<td style='color: yellow;'>$value</td>";
+            // }
+            else {
+              echo $key === "Bandeira" ?
+              "<td><img src=\"$value\" alt=\"\" height=\"45px\" width=\"50px\"></td>"
+              :
+              "<td>$value</td>";
+            }
+          }
+          echo "</tr>";
+          }
+        ?>
+      </tbody>
+    </table>
     </main>
     <footer>
 
